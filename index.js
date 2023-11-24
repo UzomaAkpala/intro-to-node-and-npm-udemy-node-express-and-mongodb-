@@ -1,31 +1,40 @@
 const fs = require("fs");
+const http = require("http");
 
 //Blocking Synchronous
-const textIn = fs.readFileSync("./txt/input.txt", "utf-8");
-console.log(textIn);
+// const textIn = fs.readFileSync("./txt/input.txt", "utf-8");
+// console.log(textIn);
 
-const textOutput = `This is what we know about the avocado: ${textIn}.\nCreated on ${Date.now()}`;
+// const textOutput = `This is what we know about the avocado: ${textIn}.\nCreated on ${Date.now()}`;
 
-fs.writeFileSync("./txt/output.txt", textOutput);
+// fs.writeFileSync("./txt/output.txt", textOutput);
 
-console.log("File written");
+// console.log("File written");
 
-const readOut = fs.readFileSync("./txt/output.txt", "utf-8");
-console.log(readOut);
+// const readOut = fs.readFileSync("./txt/output.txt", "utf-8");
+// console.log(readOut);
 
-//Non-blocking
+// //Non-blocking
 
-fs.readFile("./txt/start.txt", "utf-8", (err, data1) => {
-  if (err) return console.log("ERROR!");
-  fs.readFile(`./txt/${data1}`, "utf-8", (err, data2) => {
-    console.log(data2);
-    fs.readFile("./txt/append.txt", "utf-8", (err, data3) => {
-      console.log(data3);
-      fs.writeFile(".txt/final.txt", `${data2}\n${data3}`, "utf-8", (err) => {
-        console.log("Your file has been written");
-      });
-    });
-  });
+// fs.readFile("./txt/start.txt", "utf-8", (err, data1) => {
+//   if (err) return console.log("ERROR!");
+//   fs.readFile(`./txt/${data1}`, "utf-8", (err, data2) => {
+//     console.log(data2);
+//     fs.readFile("./txt/append.txt", "utf-8", (err, data3) => {
+//       console.log(data3);
+//       fs.writeFile(".txt/final.txt", `${data2}\n${data3}`, "utf-8", (err) => {
+//         console.log("Your file has been written");
+//       });
+//     });
+//   });
+// });
+
+// console.log("Will read file");
+
+const server = http.createServer((req, res) => {
+  res.end("Hello from the server");
 });
 
-console.log("Will read file");
+server.listen(3000, () => {
+  console.log("Server is listening on port 3000...");
+});
